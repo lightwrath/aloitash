@@ -1,7 +1,8 @@
 #!/bin/bash
-#tab=containers
-#section=chia
+#tab=Containers
+#section=Chia
 #name=Build Chia
+#icon=https://d1dipv7bkc8ff3.cloudfront.net/87/31/68/873168A.jpg
 
 docker run \
   --name chia \

@@ -1,0 +1,22 @@
+#!/bin/bash
+#tab=Hardware
+#section=Passthrough
+#name=VFIO Bind
+#icon=https://cdn.onlinewebfonts.com/svg/img_486237.png
+
+function vfioBind {
+  modprobe vfio-pci
+  for dev in "$@" do
+    vendor=$(cat /sys/bus/pci/devices/$dev/vendor)
+    device=$(cat /sys/bus/pci/devices/$dev/device)
+    if [ -e /sys/bus/pci/devices/$dev/driver ]; then
+      echo $dev > /sys/bus/pci/devices/$dev/driver/unbind
+    fi
+    echo $vendor $device > /sys/bus/pci/drivers/vfio-pci/new_id
+  done
+}
+
+vfioBind 0000:44:00.0 0000:44:00.1 \
+0000:45:00.0 0000:45:00.2 0000:45:00.3 \
+0000:09:00.0 0000:09:00.1 \
+0000:0a:00.0 0000:0a:00.2 0000:0a:00.3

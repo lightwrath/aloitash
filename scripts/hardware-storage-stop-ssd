@@ -1,0 +1,8 @@
+#!/bin/bash
+#tab=Hardware
+#section=Storage
+#name=Stop BTRFS SSD Array
+#icon=https://i.imgur.com/qIwia.gif
+
+echo "Stopping and unmounting SSD BTRFS array."
+umount /mnt/ssd

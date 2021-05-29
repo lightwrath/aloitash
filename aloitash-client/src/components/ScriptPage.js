@@ -13,7 +13,7 @@ export default function ScriptPage(props) {
           <Grid container spacing={3}>
             {props.scriptArray.map(script => (
               script.section === section &&
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={4}>
                   <ScriptCard
                     script={script}
                   />

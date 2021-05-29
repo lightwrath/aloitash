@@ -1,7 +1,8 @@
 #!/bin/bash
-#tab=containers
-#section=plex
+#tab=Containers
+#section=Plex
 #name=Build Plex
+#icon=https://www.vhv.rs/dpng/d/499-4993891_plex-icon-png-transparent-png.png
 
 docker run \
 -d \

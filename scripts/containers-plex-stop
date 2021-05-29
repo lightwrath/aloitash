@@ -1,0 +1,7 @@
+#!/bin/bash
+#tab=Containers
+#section=Plex
+#name=Stop Plex
+#icon=https://www.vhv.rs/dpng/d/499-4993891_plex-icon-png-transparent-png.png
+
+docker stop plex

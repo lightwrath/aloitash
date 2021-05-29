@@ -1,0 +1,13 @@
+#!/bin/bash
+#tab=Hardware
+#section=Passthrough
+#name=List IOMMU Device
+#icon=https://cdn.icon-icons.com/icons2/2483/PNG/512/device_list_icon_149945.png
+
+for iommu_group in $(find /sys/kernel/iommu_groups/ -maxdepth 1 -mindepth 1 -type d); do 
+  echo "IOMMU group $(basename "$iommu_group")"; 
+  for device in $(ls -1 "$iommu_group"/devices/); do 
+    echo -n $'\t'; 
+    lspci -nns "$device"; 
+  done; 
+done

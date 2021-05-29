@@ -1,0 +1,8 @@
+#!/bin/bash
+#tab=Hardware
+#section=Storage
+#name=Stop BTRFS HDD Array
+#icon=https://i.imgur.com/a8CE8Fl.gif
+
+echo "Stopping and unmounting HDD BTRFS array"
+umount /mnt/hdd
