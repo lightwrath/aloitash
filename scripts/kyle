@@ -1,0 +1,28 @@
+#!/bin/bash
+#tab=VMs
+#section=gentoo
+#name=Kyle VM
+
+for param in "$@"; do
+[ $param == "on" ] && sudo qemu-system-x86_64 \
+-enable-kvm \
+-machine type=q35,accel=kvm \
+-object rng-random,id=rng0,filename=/dev/urandom \
+-device virtio-rng-pci,rng=rng0 \
+-cpu host \
+-smp 12,sockets=1,cores=12,threads=1 \
+-m 24576 \
+-drive if=pflash,format=raw,readonly,file=/usr/share/edk2-ovmf/OVMF_CODE.fd \
+-drive if=pflash,format=raw,file=/usr/share/edk2-ovmf/OVMF_VARS.fd \
+-drive id=disk,file=/dev/disk/by-id/ata-Samsung_SSD_840_EVO_250GB_S1DBNSAF965098Z,format=raw,if=none \
+-device ahci,id=ahci \
+-device ide-hd,drive=disk,bus=ahci.0 \
+-device virtio-net,netdev=vmnic -netdev user,id=vmnic \
+-device vfio-pci,host=0b:00.0 \
+-device vfio-pci,host=0b:00.1 \
+-device vfio-pci,host=0c:00.0 \
+-device vfio-pci,host=0c:00.2 \
+-device vfio-pci,host=0c:00.3 \
+-vga none \
+-boot c
+done

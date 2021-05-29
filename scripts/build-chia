@@ -1,0 +1,11 @@
+#!/bin/bash
+#tab=containers
+#section=chia
+#name=Build Chia
+
+docker run \
+  --name chia \
+  -d ghcr.io/chia-network/chia:latest \
+  -v /mnt/ssd/appdata/chia:/root/.chia \
+  -v /mnt/sdd/Chia/plotting:/plotting \
+  -v /mnt/hdd/Chia/plots:/plots
