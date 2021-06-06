@@ -4,4 +4,4 @@
 #name=Start Gentoo
 #icon=https://i.imgur.com/ZZA2iar.gif
 
-virsh start gentoo
+virsh start Gentoo

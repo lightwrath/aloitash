@@ -4,4 +4,4 @@
 #name=Start Windows
 #icon=https://i.imgur.com/gaxG7p4.gif
 
-virsh start win10
+virsh start Windows

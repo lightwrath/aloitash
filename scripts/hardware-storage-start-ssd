@@ -6,3 +6,6 @@
 
 echo "Starting and mounting SSD BTRFS array."
 mount /dev/disk/by-id/ata-SAMSUNG_MZ7LN256HCHP-000L7_S20HNXBG437280 /mnt/ssd
+
+echo "Export /mnt/ssd via NFS"
+exportfs -o rw *:/mnt/ssd

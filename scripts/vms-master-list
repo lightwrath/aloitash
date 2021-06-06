@@ -1,7 +1,0 @@
-#!/bin/bash
-#tab=Virtual Machines
-#section=Master
-#name=Virsh List
-#icon=
-
-virsh list

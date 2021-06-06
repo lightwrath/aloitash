@@ -4,5 +4,8 @@
 #name=Stop BTRFS HDD Array
 #icon=https://i.imgur.com/a8CE8Fl.gif
 
+echo "Remove /mnt/hdd NFS export"
+exportfs -u *:/mnt/hdd
+
 echo "Stopping and unmounting HDD BTRFS array"
 umount /mnt/hdd

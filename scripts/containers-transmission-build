@@ -1,0 +1,22 @@
+#!/bin/bash
+#tab=Containers
+#section=Transmission
+#name=Build Transmission
+#icon=https://upload.wikimedia.org/wikipedia/commons/6/6d/Transmission_icon.png
+
+docker run -d \
+  --name=transmission \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/Helsinki \
+  -e TRANSMISSION_WEB_HOME=/combustion-release/ `#optional` \
+  -e USER=lightwrath `#optional` \
+  -e PASS=ar2i9537 `#optional` \
+  -p 9091:9091 \
+  -p 51413:51413 \
+  -p 51413:51413/udp \
+  -v /mnt/ssd/appdata/transmission/:/config \
+  -v /mnt/ssd/tmp/transmission/downloads/:/downloads \
+  -v /mnt/ssd/tmp/transmission/watch/:/watch \
+  --restart unless-stopped \
+  ghcr.io/linuxserver/transmission

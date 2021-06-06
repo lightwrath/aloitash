@@ -1,0 +1,7 @@
+#!/bin/bash
+#tab=Containers
+#section=Transmission
+#name=Stop Transmission
+#icon=https://upload.wikimedia.org/wikipedia/commons/6/6d/Transmission_icon.png
+
+docker stop transmission

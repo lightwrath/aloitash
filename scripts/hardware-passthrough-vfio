@@ -5,8 +5,9 @@
 #icon=https://cdn.onlinewebfonts.com/svg/img_486237.png
 
 function vfioBind {
+  echo "$@"
   modprobe vfio-pci
-  for dev in "$@" do
+  for dev in "$@"; do
     vendor=$(cat /sys/bus/pci/devices/$dev/vendor)
     device=$(cat /sys/bus/pci/devices/$dev/device)
     if [ -e /sys/bus/pci/devices/$dev/driver ]; then

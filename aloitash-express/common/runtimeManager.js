@@ -3,7 +3,7 @@ const { spawn } = require('child_process')
 const scriptDirRelativePath = path.resolve('../scripts')
 
 function execute(script) {
-  const subprocess = spawn('bash', [
+  const subprocess = spawn('sh', [
     `${scriptDirRelativePath}/${script}`
   ])
 

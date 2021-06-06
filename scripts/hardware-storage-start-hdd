@@ -29,3 +29,6 @@ echo "Set disk standby timer"
 for hdd in ${hddIds[@]}; do
   hdparm -S$hddStandbyTime /dev/disk/by-id/$hdd
 done
+
+echo "Exporting /mnt/hdd via NFS"
+exportfs -o rw *:/mnt/hdd

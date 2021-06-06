@@ -1,0 +1,13 @@
+#!/bin/bash
+#tab=System
+#section=Maintanence
+#name=Update System
+#icon=https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Gentoo_Linux_logo_matte.svg/1200px-Gentoo_Linux_logo_matte.svg.png
+
+emerge --sync
+emerge --verbose --update --deep --changed-use @world
+emerge --depclean -v
+emerge @module-rebuild
+emerge --config sys-kernel/gentoo-kernel
+rm /boot/*.old
+grub-mkconfig -o /boot/grub/grub.cfg
