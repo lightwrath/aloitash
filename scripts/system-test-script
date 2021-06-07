@@ -4,4 +4,7 @@
 #name=Test Script
 #icon=https://media.giphy.com/media/mFwqFZx1HxfQ4hwkz9/giphy.gif
 
-echo "Test script ran"
+echo "Starting test script"
+sleep 3s
+ls 
+echo "Test complete"
