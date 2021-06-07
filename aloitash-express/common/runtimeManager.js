@@ -2,10 +2,21 @@ const path = require('path')
 const { spawn } = require('child_process')
 const scriptDirRelativePath = path.resolve('../scripts')
 
-function execute(script) {
+const runtimeStatusCache = {
+}
+function getRuntimeStatus(entry) {
+  if (entry) {
+    return runtimeStatusCache[entry]
+  } else {
+    return runtimeStatusCache
+  }
+}
+
+async function execute(scriptId) {
   const subprocess = spawn('sh', [
-    `${scriptDirRelativePath}/${script}`
+    `${scriptDirRelativePath}/${scriptId}`
   ])
+  runtimeStatusCache[scriptId] = true
 
   subprocess.stdout.on('data', (data) => {
     console.log(data.toString())
@@ -14,10 +25,13 @@ function execute(script) {
     console.error(data.toString())
   })
   subprocess.on('exit', (code) => {
-    console.info(`Script ${script} exited with code: ${code}`)
+    console.info(`Script ${scriptId} exited with code: ${code}`)
+    runtimeStatusCache[scriptId] = false
   })
+  return subprocess
 }
 
 module.exports = { 
+  getRuntimeStatus,
   execute
 }

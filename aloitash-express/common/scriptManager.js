@@ -1,6 +1,8 @@
 const path = require('path')
 const fs = require('fs')
 
+const runtimeManager = require("./runtimeManager")
+
 function getScriptIndex() {
   const scriptDirPath = path.resolve('../scripts')
   const scriptArray = fs.readdirSync(scriptDirPath)
@@ -19,6 +21,7 @@ function readScript(fullFilePath) {
     section: getSection(fullContents),
     name: getName(fullContents),
     icon: getIcon(fullContents),
+    runtime: runtimeManager.getRuntimeStatus(getId(fullFilePath)) || false,
     content: fullContents
   }
 

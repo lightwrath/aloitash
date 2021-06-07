@@ -14,8 +14,8 @@ class App extends React.Component {
   async componentDidMount() {
     this.setState({ scriptArray: await getScriptIndex() })
   }
-
   render() {
+    console.log(this.state)
     if (this.state.scriptArray) {
       return (
         <MainAppTabs 
