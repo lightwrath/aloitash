@@ -8,10 +8,17 @@ import StopIcon from '@material-ui/icons/Stop'
 import SettingsIcon from '@material-ui/icons/Settings'
 import NotesIcon from '@material-ui/icons/Notes'
 
-import { execute } from '../api'
+import { execute, streamStdoutFrom } from '../api'
 
 export default function ScriptCard(props) {
-  const [isScriptRunning, setIsScriptRunning] = useState(0)
+  const [isScriptRunning, setIsScriptRunning] = useState(props.script.runtime)
+
+  const runScript = async () => {
+    setIsScriptRunning(true)
+    await execute(props.script.id)
+    await streamStdoutFrom(props.script.id)
+    setIsScriptRunning(false)
+  }
 
   return (
     <Card style={{ padding: '25px'}}>
@@ -21,7 +28,7 @@ export default function ScriptCard(props) {
       <h4>{props.script.name}</h4>
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          {props.script.runtime || isScriptRunning ? (
+          {isScriptRunning ? (
             <Button 
               variant="contained"
               color="secondary"
@@ -34,11 +41,7 @@ export default function ScriptCard(props) {
           ) : (
             <Button 
               variant="contained"
-              onClick={async () => {
-                setIsScriptRunning(true)
-                await execute(props.script.id)
-                setIsScriptRunning(false)
-              }}
+              onClick={runScript}
             >
               <PlayArrowIcon />
             </Button>

@@ -4,7 +4,7 @@ const { execute, getProcess } = require('../common/runtime')
 
 router.get('/:id', async function(req, res) {
   await execute(req.params.id)
-  res.end()
+  res.end("{}")
 })
 
 router.get('/:id/stdout', async function(req, res) {
