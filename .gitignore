@@ -2,3 +2,4 @@ aloitash-express/node_modules
 aloitash-server/target
 aloitash-client/node_modules
 aloitash-client/build
+logs/
