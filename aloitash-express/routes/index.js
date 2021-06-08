@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const scriptManager = require('../common/scriptManager')
+const scriptManager = require('../common/scriptDir')
 
 router.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../../aloitash-client/build/index.html'))

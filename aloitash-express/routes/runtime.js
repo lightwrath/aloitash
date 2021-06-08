@@ -1,12 +1,23 @@
 var express = require('express');
 var router = express.Router();
-const { execute } = require('../common/runtimeManager')
+const { execute, getProcess } = require('../common/runtime')
 
 router.get('/:id', async function(req, res) {
-  const subprocessEvent = await execute(req.params.id)
+  await execute(req.params.id)
+  res.end()
+})
 
-  subprocessEvent.on('exit', (code) => {
-    res.end()
+router.get('/:id/stdout', async function(req, res) {
+  const scriptId = req.params.id
+  const processStream = getProcess(scriptId)
+  processStream.stdout.on('data', (output) => {
+    res.write(`[${(new Date).toISOString()}]: ${output.toString()}`)
+  })
+  processStream.stderr.on('data', (error) => {
+    res.write(`[${(new Date).toISOString()}]: ${error.toString()}`)
+  })
+  processStream.on('exit', code => {
+    res.end(`[${(new Date).toISOString()}]: >>> Process exited with code ${code.toString()}. <<<`)
   })
 })
 
