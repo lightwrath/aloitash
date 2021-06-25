@@ -21,23 +21,20 @@ export default function ScriptCard(props) {
     const scriptData = await getScriptById(props.scriptId)
     setScript(scriptData)
     if (scriptData.isRunning) {
-      const jsonStream = await getLogStream()
-      jsonStream.on('end', () => {
-        setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
+      await getLogStream(scriptData.id, (text) => {
+        console.log(text)
       })
+      setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
     }
   }
 
   const handleRun = async () => {
     setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
     await execute(script.id)
-    const jsonStream = await getLogStream()
-    jsonStream.on('data', logLine => {
-      console.log(logLine)
+    await getLogStream(script.id, (text) => {
+      console.log(text)
     })
-    jsonStream.on('end', () => {
-      setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
-    })
+    setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
   }
 
   if (script) {

@@ -1,4 +1,3 @@
-import JSONStream from 'json-stream'
 
 export async function getScriptIndex() {
   const response = await fetch('/script-index')
@@ -20,16 +19,14 @@ export async function execute(scriptId) {
   return await response.json()
 }
 
-export async function getLogStream(scriptId) {
+export async function getLogStream(scriptId, callback) {
   const response = await fetch(`/log-stream/${scriptId}`)
-  const jsonStream = JSONStream.parse("*")
-  const reader = response.body.getReader()
+  const readableStream = response.body.getReader()
   while (true) {
-    const { value, done } = await reader.read()
+    const { value, done } = await readableStream.read()
     if (done) {
       break
     }
-    jsonStream.write(value)
+    callback(new TextDecoder().decode(value))
   }
-  return jsonStream
 }

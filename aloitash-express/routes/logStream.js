@@ -11,13 +11,14 @@ router.get('/:id', async function(req, res) {
     'Transfer-Encoding': 'chunked'
   })
 
-  res.write('[')
+  //res.write('[')
   stdioStream.on('stdio', (data) => {
-    res.write(`"${btoa(data)}",`)
+    //res.write(`"${btoa(data)}",`)
+    res.write(data)
   })
   stdioStream.on('end', () => {
-    res.write('"end"')
-    res.write(']')
+    //res.write('"end"')
+    //res.write(']')
     res.end()
   })
 })
