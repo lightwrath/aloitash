@@ -1,0 +1,8 @@
+#!/bin/bash
+#tab=System
+#section=Maintanence
+#name=Backup Storage
+#icon=https://media.giphy.com/media/LNDBTeQl8lhTO/giphy.gif
+
+rclone sync -u /mnt/ssd Google:/ssd
+#rclone sync -u /mnt/hdd Google:/hdd
