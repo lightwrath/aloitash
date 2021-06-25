@@ -20,17 +20,17 @@ export default function ScriptCard(props) {
   async function initialiseScriptState() {
     const scriptData = await getScriptById(props.scriptId)
     setScript(scriptData)
-    if (scriptData.runtime) {
+    if (scriptData.isRunning) {
       console.log(await streamStdoutFrom(scriptData.id))
-      setScript(prevState => ({ ...prevState, runtime: !prevState.runtime }))
+      setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
     }
   }
 
   const handleRun = async () => {
-    setScript(prevState => ({ ...prevState, runtime: !prevState.runtime }))
+    setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
     await execute(script.id)
     console.log(await streamStdoutFrom(script.id))
-    setScript(prevState => ({ ...prevState, runtime: !prevState.runtime }))
+    setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
   }
 
   if (script) {
@@ -44,7 +44,7 @@ export default function ScriptCard(props) {
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <RunButton
-              isRunning={script.runtime}
+              isRunning={script.isRunning}
               onClick={handleRun}
             />
           </Grid>
