@@ -15,7 +15,7 @@ export async function getScriptById(id) {
 }
 
 export async function execute(scriptId) {
-  const response = await fetch(`/runtime/${scriptId}`)
+  const response = await fetch(`/script/${scriptId}/execute`)
   return await response.json()
 }
 

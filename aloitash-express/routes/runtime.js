@@ -1,11 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { execute, getProcess } = require('../common/runtime')
-
-router.get('/:id', async function(req, res) {
-  await execute(req.params.id)
-  res.end("{}")
-})
+const { getProcess } = require('../common/runtime')
 
 router.get('/:id/stdout', async function(req, res) {
   const scriptId = req.params.id
