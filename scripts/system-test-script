@@ -7,4 +7,7 @@
 echo "Starting test script"
 sleep 3s
 ls 
-echo "Test complete"
+echo "list complete"
+sleep 3s
+cat /proc/cpuinfo
+echo "Test Complete"

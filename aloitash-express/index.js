@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const cors = require('cors')
 const debug = require('debug')('aloitash-express:server');
 const http = require('http');
 
@@ -27,7 +26,6 @@ function initExpressFeatures(app) {
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, '../aloitash-client/build')));
-  app.use(cors())
 }
 
 function initExpressRoutes(app) {

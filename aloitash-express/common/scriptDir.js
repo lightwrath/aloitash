@@ -23,7 +23,7 @@ function readScript(scriptId) {
     section: getSection(fullContents),
     name: getName(fullContents),
     icon: getIcon(fullContents),
-    isRunning: !!runtime.getProcess(getId(fullFilePath)) || null,
+    isRunning: !!runtime.getProcessStream(getId(fullFilePath)) || null,
     content: fullContents
   }
 
