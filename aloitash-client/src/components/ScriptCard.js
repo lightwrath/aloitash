@@ -8,7 +8,7 @@ import NotesIcon from '@material-ui/icons/Notes'
 
 import CardHeader from './CardHeader'
 import RunButton from './RunButton'
-import { getScriptById, execute, streamStdoutFrom } from '../api'
+import { getScriptById, execute, streamLogs } from '../api'
 
 export default function ScriptCard(props) {
   const [script, setScript] = useState()
@@ -21,7 +21,7 @@ export default function ScriptCard(props) {
     const scriptData = await getScriptById(props.scriptId)
     setScript(scriptData)
     if (scriptData.isRunning) {
-      console.log(await streamStdoutFrom(scriptData.id))
+      console.log(await streamLogs(scriptData.id))
       setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
     }
   }
@@ -29,7 +29,7 @@ export default function ScriptCard(props) {
   const handleRun = async () => {
     setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
     await execute(script.id)
-    console.log(await streamStdoutFrom(script.id))
+    console.log(await streamLogs(script.id))
     setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
   }
 

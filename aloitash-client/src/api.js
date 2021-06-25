@@ -19,7 +19,7 @@ export async function execute(scriptId) {
   return await response.json()
 }
 
-export async function streamStdoutFrom(scriptId) {
-  const response = await fetch(`/runtime/${scriptId}/stdout`)
+export async function streamLogs(scriptId) {
+  const response = await fetch(`/log-stream/${scriptId}`)
   return await response.text()
 }

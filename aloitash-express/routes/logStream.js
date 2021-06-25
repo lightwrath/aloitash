@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
+
 const { getProcess } = require('../common/runtime')
 
-router.get('/:id/stdout', async function(req, res) {
+router.get('/:id', async function(req, res) {
   const scriptId = req.params.id
   const processStream = getProcess(scriptId)
   processStream.stdout.on('data', (output) => {

@@ -33,12 +33,12 @@ function initExpressFeatures(app) {
 function initExpressRoutes(app) {
   const indexRouter = require('./routes/index')
   const scriptRouter = require('./routes/script')
-  const runtimeRouter = require('./routes/runtime')
+  const logStreamRouter = require('./routes/logStream')
   const terminalRouter = require('./routes/terminal')
 
   app.use('/', indexRouter)
   app.use('/script', scriptRouter)
-  app.use('/runtime', runtimeRouter)
+  app.use('/log-stream', logStreamRouter)
   app.use('/terminal', terminalRouter)
 
   // catch 404 and forward to error handler
