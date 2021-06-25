@@ -4,14 +4,15 @@ import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import SettingsIcon from '@material-ui/icons/Settings'
-import NotesIcon from '@material-ui/icons/Notes'
 
 import CardHeader from './CardHeader'
 import RunButton from './RunButton'
+import LogButton from './LogButton'
 import { getScriptById, execute, getLogStream } from '../api'
 
 export default function ScriptCard(props) {
   const [script, setScript] = useState()
+  const [logs, setLogs] = useState("")
 
   useEffect(async () => {
     await initialiseScriptState()
@@ -21,8 +22,8 @@ export default function ScriptCard(props) {
     const scriptData = await getScriptById(props.scriptId)
     setScript(scriptData)
     if (scriptData.isRunning) {
-      await getLogStream(scriptData.id, (text) => {
-        console.log(text)
+      await getLogStream(scriptData.id, (latestLog) => {
+        setLogs(logs => logs + latestLog)
       })
       setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
     }
@@ -31,8 +32,8 @@ export default function ScriptCard(props) {
   const handleRun = async () => {
     setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
     await execute(script.id)
-    await getLogStream(script.id, (text) => {
-      console.log(text)
+    await getLogStream(script.id, (latestLog) => {
+      setLogs(logs => logs + latestLog)
     })
     setScript(prevState => ({ ...prevState, isRunning: !prevState.isRunning }))
   }
@@ -53,9 +54,9 @@ export default function ScriptCard(props) {
             />
           </Grid>
           <Grid item xs={4}>
-            <Button variant="contained">
-              <NotesIcon />
-            </Button>
+            <LogButton
+              logStream={logs}
+            />
           </Grid>
           <Grid item xs={4}>
             <Button variant="contained">
