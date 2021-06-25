@@ -1,4 +1,4 @@
-import JSONStream from 'JSONStream'
+import JSONStream from 'json-stream'
 
 export async function getScriptIndex() {
   const response = await fetch('/script-index')
