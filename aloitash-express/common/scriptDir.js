@@ -3,13 +3,15 @@ const fs = require('fs')
 
 const runtime = require("./runtime")
 
+const scriptDirPath = path.resolve('../scripts')
+
 function getScriptIndex() {
-  const scriptDirPath = path.resolve('../scripts')
   const scriptArray = fs.readdirSync(scriptDirPath)
-  return scriptArray.map(file => readScript(scriptDirPath + '/' + file))
+  return scriptArray.map(file => readScript(file))
 }
 
-function readScript(fullFilePath) {
+function readScript(scriptId) {
+  const fullFilePath = `${scriptDirPath}/${scriptId}`
   if (!fs.existsSync(fullFilePath)) {
     console.error("\x1b[33m%s\x1b[0m", `${fullFilePath} was not found.`)
     return
@@ -58,6 +60,4 @@ function readScript(fullFilePath) {
   }
 }
 
-module.exports = { 
-  getScriptIndex 
-}
+module.exports = { getScriptIndex, readScript }
