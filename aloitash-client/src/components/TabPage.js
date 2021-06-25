@@ -25,5 +25,8 @@ export default function TabPage(props) {
 }
 
 const paperStyle = {
+  paddingLeft: '10px',
+  paddingRight: '10px',
+  paddingBottom: '10px',
   marginBottom: '25px'
 }
