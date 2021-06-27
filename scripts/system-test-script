@@ -10,4 +10,6 @@ ls
 echo "list complete"
 sleep 3s
 cat /proc/cpuinfo
+sleep 3s
+ls 
 echo "Test Complete"

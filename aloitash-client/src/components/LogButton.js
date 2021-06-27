@@ -1,11 +1,23 @@
-import React, { useState, fragment } from 'react'
+import React, { useState, useEffect, useRef, fragment } from 'react'
 import Modal from '@material-ui/core/Modal'
+import Toolbar from '@material-ui/core/Toolbar'
+import Card from '@material-ui/core/Card'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import NotesIcon from '@material-ui/icons/Notes'
 
 export default function RunButton(props) {
   const [open, setOpen] = useState(false)
+
+  const logEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    logEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [props])
 
   return (
     <>
@@ -23,24 +35,37 @@ export default function RunButton(props) {
           setOpen(false)
         }}
       >
-        <Paper
+        <Card
           style={{
             margin: '5%',
             width: '90%',
             height: '90%',
-            whiteSpace: 'pre-wrap',
-            overflow: 'scroll'
+            display: 'flex',
+            flexFlow: 'column'
           }}
         >
-          <Button
-            onClick={() => {
-              setOpen(false)
+          <Toolbar>
+            <Button
+              onClick={() => {
+                setOpen(false)
+              }}
+            >
+              Close
+            </Button>
+          </Toolbar>
+          <Paper
+            style={{
+              whiteSpace: 'pre-wrap',
+              overflowY: 'auto',
             }}
           >
-            Close
-          </Button>
-          {props.logStream}
-        </Paper>
+            {props.logStream}
+            <div 
+              ref={logEndRef}
+            >
+            </div>
+          </Paper>
+        </Card>
       </Modal>
     </>
   )
